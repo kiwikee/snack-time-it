@@ -309,9 +309,12 @@ function renderRankRows(container, ranked, ctx){
       <div class="stats-body">
         <div class="stats-label">
           <span class="name">${item.e} ${item.t}</span>
-          <span>${item.score}%${item.real ? ` <span style="opacity:.55;font-weight:500;">(${item.votes}표)</span>` : ''}${isChamp ? '<span class="me-badge">내 1위</span>' : isRunner ? '<span class="me-badge">내 2위</span>' : ''}</span>
+          ${isChamp ? '<span class="me-badge">내 1위</span>' : isRunner ? '<span class="me-badge">내 2위</span>' : ''}
         </div>
-        <div class="stats-bar-track"><div class="stats-bar-fill" style="width:${item.score}%"></div></div>
+        <div class="stats-meter">
+          <div class="stats-bar-track"><div class="stats-bar-fill" style="width:${item.score}%"></div></div>
+          <span class="stats-score">${item.score}%${item.real ? ` <span style="opacity:.55;font-weight:500;">(${item.votes}회 비교)</span>` : ''}</span>
+        </div>
       </div>
     `;
     container.appendChild(row);
@@ -322,7 +325,7 @@ async function showChampion(champion){
   currentChampion = champion;
   el('champEmoji').textContent = champion.e;
   el('champText').textContent = champion.t;
-  el('runnerUpText').textContent = `2위 (아깝게 살아남음): ${runnerUp.e} ${runnerUp.t}`;
+  el('runnerUpText').textContent = `2위: ${runnerUp.e} ${runnerUp.t}`;
   el('resultCatLabel').textContent = `${activeCategory.emoji} ${activeCategory.title} · 최종 결과`;
 
   const grid = el('top4Grid');
@@ -343,8 +346,8 @@ async function showChampion(champion){
   const ranked = await buildRankedList(activeCategory);
   const champRank = ranked.findIndex(x => x.t === champion.t) + 1;
   el('rankCallout').textContent = champRank === 1
-    ? `🎯 정확히 맞혔어요! 전체 통계에서도 진짜 1위예요.`
-    : `📊 전체 통계에서는 실제로 ${champRank}위에 해당해요.`;
+    ? `🎯 다들 이걸 최악으로 꼽았어요. 전체 통계에서도 1위예요.`
+    : `📊 전체 통계에서는 ${champRank}위에 해당해요. 사람마다 최악은 다르니까요.`;
   el('resultStatsSub').textContent = isFirebaseConfigured()
     ? '실제 참여자들의 누적 선택 통계예요. 내가 고른 항목은 강조돼요.'
     : '(통계 연동 전 임시 수치예요. 내가 고른 항목은 강조돼요.)';

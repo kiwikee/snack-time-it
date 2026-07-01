@@ -215,13 +215,16 @@
   .stats-rank.r2::before{ content:"🥈"; margin-right:2px; }
   .stats-rank.r3::before{ content:"🥉"; margin-right:2px; }
   .stats-body{ flex:1; min-width:0; }
-  .stats-label{ display:flex; justify-content:space-between; gap:8px; font-size:12px; font-weight:600; margin-bottom:5px; line-height:1.4; }
+  .stats-label{ display:flex; align-items:baseline; gap:6px; font-size:12px; font-weight:600; margin-bottom:5px; line-height:1.4; }
   .stats-row.me .stats-label{ font-weight:800; }
   .stats-label .name{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .stats-bar-track{ height:13px; border:2.5px solid var(--ink); background:var(--paper); overflow:hidden; }
+  .stats-meter{ display:flex; align-items:center; gap:8px; }
+  .stats-bar-track{ flex:1; min-width:0; height:13px; border:2.5px solid var(--ink); background:var(--paper); overflow:hidden; }
   .stats-bar-fill{ height:100%; background:var(--b); transition:width .6s cubic-bezier(.22,1,.36,1); }
   .stats-row.top .stats-bar-fill{ background:var(--a); }
   .stats-row.me .stats-bar-fill{ background:var(--violet); }
+  .stats-score{ font-size:12px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+  .stats-row.me .stats-score{ font-weight:800; }
   .me-badge{
     font-size:10px; font-weight:800; background:var(--ink); color:var(--paper); padding:1px 6px; margin-left:4px;
   }
@@ -239,5 +242,7 @@
     .action-row{ flex-direction:column; }
     .action-row button{ width:100%; }
     .step-label{ font-size:9px; }
+    .stats-label{ flex-wrap:wrap; }
+    .stats-label .name{ overflow:visible; text-overflow:clip; white-space:normal; }
   }
   @media (prefers-reduced-motion:reduce){ *{ transition-duration:.01ms !important; animation-duration:.01ms !important; } }
