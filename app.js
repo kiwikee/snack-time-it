@@ -29,6 +29,17 @@ async function recordVote(catId, shownIdA, shownIdB, pickedId){
   }
 }
 
+async function recordChampion(catId, itemId){
+  if(!isFirebaseConfigured()) return; // 설정 전이면 조용히 스킵 (로컬 가짜 통계만 사용)
+  try{
+    await fetch(`${FIREBASE_DB_URL}/votes/${catId}/${itemId}.json`, {
+      method:'PATCH', body: JSON.stringify({ "champCount": { ".sv": { "increment": 1 } } })
+    });
+  }catch(err){
+    console.warn('챔피언 기록 실패 (네트워크/설정 확인 필요)', err);
+  }
+}
+
 async function fetchRealStats(catId){
   if(!isFirebaseConfigured()) return null;
   try{
@@ -285,7 +296,7 @@ async function buildRankedList(cat){
       if(r && r.shown > 0){
         // 실데이터: 이 항목이 "더 최악"으로 뽑힌 비율
         const pct = Math.round(((r.picked || 0) / r.shown) * 100);
-        return { ...item, score: pct, votes: r.shown, real: true };
+        return { ...item, score: pct, votes: r.picked || 0, real: true };
       }
       // 아직 투표 데이터가 없으면 고정 해시값으로 대체 (완전히 랜덤하게 안 튀도록)
       return { ...item, score: worstScore(item.t), votes: 0, real: false };
@@ -313,7 +324,7 @@ function renderRankRows(container, ranked, ctx){
         </div>
         <div class="stats-meter">
           <div class="stats-bar-track"><div class="stats-bar-fill" style="width:${item.score}%"></div></div>
-          <span class="stats-score">${item.score}%${item.real ? ` <span style="opacity:.55;font-weight:500;">(${item.votes}회 비교)</span>` : ''}</span>
+          <span class="stats-score">${item.score}%${item.real ? ` <span style="opacity:.55;font-weight:500;">(${item.votes}번 선택됨)</span>` : ''}</span>
         </div>
       </div>
     `;
@@ -323,6 +334,7 @@ function renderRankRows(container, ranked, ctx){
 
 async function showChampion(champion){
   currentChampion = champion;
+  recordChampion(activeCategory.id, champion.id);
   el('champEmoji').textContent = champion.e;
   el('champText').textContent = champion.t;
   el('runnerUpText').textContent = `2위: ${runnerUp.e} ${runnerUp.t}`;
@@ -358,7 +370,7 @@ async function showChampion(champion){
 async function openStats(catId, ctx){
   const cat = CATEGORIES.find(c => c.id === catId);
 
-  el('statsTitle').textContent = `📊 ${cat.emoji} ${cat.title} 최악 랭킹`;
+  el('statsTitle').textContent = `📊 ${cat.emoji} ${cat.title} 최악 승률 랭킹`;
   el('statsSub').textContent = '불러오는 중...';
   el('statsList').innerHTML = '';
   showScreen('stats');
