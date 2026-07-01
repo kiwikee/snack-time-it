@@ -277,17 +277,6 @@ el('logoBtn').addEventListener('click', () => showScreen('intro'));
 el('toIntroBtn').addEventListener('click', () => showScreen('intro'));
 el('backFromStats').addEventListener('click', () => showScreen('intro'));
 
-el('shareBtn').addEventListener('click', () => {
-  const champ = el('champText').textContent;
-  const text = `IT 최악의 경험 16강 - ${activeCategory.title}\n🏆 최종 우승(최악): ${champ}\n2위: ${runnerUp ? runnerUp.t : ''}`;
-  navigator.clipboard?.writeText(text).then(() => {
-    const btn = el('shareBtn');
-    const original = btn.textContent;
-    btn.textContent = '✅ 복사 완료!';
-    setTimeout(() => btn.textContent = original, 1400);
-  }).catch(() => {});
-});
-
 async function buildRankedList(cat){
   const real = await fetchRealStats(cat.id); // null이면 미설정 상태
   return [...cat.items]
@@ -295,7 +284,7 @@ async function buildRankedList(cat){
       const r = real && real[item.id];
       if(r && r.shown > 0){
         // 실데이터: 이 항목이 "더 최악"으로 뽑힌 비율
-        const pct = Math.round((r.picked / r.shown) * 100);
+        const pct = Math.round(((r.picked || 0) / r.shown) * 100);
         return { ...item, score: pct, votes: r.shown, real: true };
       }
       // 아직 투표 데이터가 없으면 고정 해시값으로 대체 (완전히 랜덤하게 안 튀도록)
