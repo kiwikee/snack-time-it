@@ -48,7 +48,7 @@ const CATEGORIES = [
   },
   {
     id: 'developer', emoji: '🧑‍💻', title: '개발자 편',
-    desc: '개발자들만 온전히 공감할 수 있는 찐한 에러급 상황들.',
+    desc: '개발자들이 공감할 수 있는 찐한 에러급 상황들.',
     items: [
       {id: 'd01', t: "보안·망분리 핑계로 ChatGPT, Claude 등 AI 툴 전면 차단", e: "🤖"},
       {id: 'd02', t: "개발자인데 RAM 8GB 탑재된 기본형 노트북 지급", e: "💻"},
@@ -70,7 +70,7 @@ const CATEGORIES = [
   },
   {
     id: 'freelance', emoji: '💼', title: '프리랜서 편',
-    desc: '소속이 없다는 이유로 겪는 서러운 차별과 갑질.',
+    desc: '서러운 프리랜서 생활.',
     items: [
       {id: 'f01', t: "보안상 출입증 안 줘서 매번 직원 올 때까지 벨 눌러야 함", e: "🚪"},
       {id: 'f02', t: "회의실 예약 권한이 없어서 복도나 카페에서 미팅", e: "🚶"},
