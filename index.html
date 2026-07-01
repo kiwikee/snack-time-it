@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT 최악의 경험 16강 🏆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="stage">
+
+  <div class="topbar">
+    <span class="logo" id="logoBtn">최악의 경험 16강</span>
+    <span class="round-chip" id="roundChip">16강</span>
+  </div>
+  <div class="stepper" id="stepper"></div>
+
+  <!-- INTRO / CATEGORY SELECT -->
+  <section class="screen active" id="screen-intro">
+    <div class="intro-head">
+      <h1>어떤게 <span class="hl">최악</span>일까? </h1>
+      <p>카테고리를 골라주세요. 16강을 시작합니다</p>
+    </div>
+    <div id="catList"></div>
+  </section>
+
+  <!-- ROUND TRANSITION -->
+  <section class="screen" id="screen-roundintro">
+    <div class="roundintro-card">
+      <div class="ri-emoji" id="riEmoji">🔥</div>
+      <div class="ri-eyebrow" id="riEyebrow">ROUND CLEAR</div>
+      <div class="ri-title" id="riTitle">8강 진출!</div>
+      <div class="ri-desc" id="riDesc">이제부터 더 팽팽한 최악들의 대결이 시작돼요.</div>
+      <button class="ri-btn" id="riNextBtn">다음 라운드 시작 ▶</button>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section class="screen" id="screen-game">
+    <div class="q-title">더 최악인 건? 😈</div>
+    <div class="versus">
+      <div class="card a" id="optA" tabindex="0" role="button">
+        <div class="emoji" id="emojiA">💀</div>
+        <div class="txt" id="textA">-</div>
+        <span class="tagpick" id="tagA">☠️ 내 선택</span>
+      </div>
+      <div class="vs-sticker">VS</div>
+      <div class="card b" id="optB" tabindex="0" role="button">
+        <div class="emoji" id="emojiB">💀</div>
+        <div class="txt" id="textB">-</div>
+        <span class="tagpick" id="tagB">☠️ 내 선택</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAMPION + FULL STATS RESULT -->
+  <section class="screen" id="screen-result">
+    <div class="result-card">
+      <div class="trophy">🏆</div>
+      <div class="result-eyebrow" id="resultCatLabel">카테고리 최종 결과</div>
+      <div class="champion-box">
+        <div class="emoji" id="champEmoji">💀</div>
+        <div class="champion-title" id="champText">-</div>
+      </div>
+      <div class="rank-callout" id="rankCallout">전체 통계 순위 계산 중...</div>
+      <div class="runner-up" id="runnerUpText">2위 -</div>
+
+      <div class="recap-title">🔥 4강까지 살아남았던 최악들</div>
+      <div class="recap-grid" id="top4Grid"></div>
+
+      <div class="result-stats-title">📊 전체 항목 통계 순위</div>
+      <div class="result-stats-sub" id="resultStatsSub">내가 고른 항목은 굵게 표시돼요.</div>
+      <div id="resultStatsList"></div>
+
+      <div class="action-row">
+        <button class="btn ghost" id="retryBtn">🔁 다시하기</button>
+        <button class="btn solid" id="shareBtn">📋 결과 복사</button>
+        <button class="btn mint" id="toIntroBtn">◀ 다른 카테고리</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDALONE STATS PAGE (통계만 보기) -->
+  <section class="screen" id="screen-stats">
+    <div class="stats-card">
+      <div class="stats-title" id="statsTitle">📊 최악 랭킹</div>
+      <div class="stats-sub" id="statsSub">사람들이 최악으로 가장 많이 선택한 순위예요.</div>
+      <div id="statsList"></div>
+      <div class="action-row">
+        <button class="btn ghost" id="backFromStats">◀ 카테고리 선택으로</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+<script src="items.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
