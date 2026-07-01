@@ -24,7 +24,7 @@
     font-family:'Noto Sans KR', 'Space Grotesk', sans-serif;
     font-weight:500;
     min-height:100vh;
-    display:flex; align-items:center; justify-content:center;
+    display:flex; align-items:center; align-items:safe center; justify-content:center;
     padding:20px; overflow-x:hidden; position:relative;
     word-break:keep-all; overflow-wrap:break-word;
   }
@@ -229,6 +229,9 @@
   .confetti{ position:fixed; top:-10px; width:9px; height:9px; z-index:99; pointer-events:none; animation:fall linear forwards; }
   @keyframes fall{ to{ transform:translateY(110vh) rotate(540deg); opacity:.9; } }
 
+  @media (max-width:640px){
+    body{ padding:20px 16px calc(40px + env(safe-area-inset-bottom)); }
+  }
   @media (max-width:520px){
     .versus{ grid-template-columns:1fr; }
     .card{ min-height:150px; }
